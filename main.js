@@ -4,8 +4,8 @@
     var canvas = document.getElementById('canvas');
     var navItems = document.querySelectorAll('.nav__item');
     var directionArrow = document.getElementById('directionArrow');
-    var sectionNames = ['hero', 'projects', 'about', 'skills', 'blog', 'contact'];
-    var sectionProgress = [0, 0.2, 0.4, 0.6, 0.8, 1.0];
+    var sectionNames = ['hero', 'projects', 'experience', 'about', 'skills', 'blog', 'contact'];
+    var sectionProgress = [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6, 1.0];
     var activated = {};
     var gsapCtx;
 
@@ -26,15 +26,16 @@
             var vh = window.innerHeight;
 
             // Position canvas so Hero is visible
-            gsap.set(canvas, { x: 0, y: -2 * vh, visibility: 'visible' });
+            gsap.set(canvas, { x: 0, y: -3 * vh, visibility: 'visible' });
 
             // Set initial animation states per direction of travel
-            gsap.set('.section--hero .animate-in',     { opacity: 0, y: 20 });
-            gsap.set('.section--projects .animate-in', { opacity: 0, x: 20 });
-            gsap.set('.section--about .animate-in',    { opacity: 0, y: -20 });
-            gsap.set('.section--skills .animate-in',   { opacity: 0, x: 20 });
-            gsap.set('.section--blog .animate-in',     { opacity: 0, y: -20 });
-            gsap.set('.section--contact .animate-in',  { opacity: 0, x: 20 });
+            gsap.set('.section--hero .animate-in',       { opacity: 0, y: 20 });
+            gsap.set('.section--projects .animate-in',   { opacity: 0, x: 20 });
+            gsap.set('.section--experience .animate-in', { opacity: 0, y: -20 });
+            gsap.set('.section--about .animate-in',      { opacity: 0, x: 20 });
+            gsap.set('.section--skills .animate-in',     { opacity: 0, y: -20 });
+            gsap.set('.section--blog .animate-in',       { opacity: 0, x: 20 });
+            gsap.set('.section--contact .animate-in',    { opacity: 0, y: -20 });
 
             // Animate hero content in on load
             gsap.to('.section--hero .animate-in', {
@@ -49,14 +50,16 @@
 
             // Segment 1: Hero → Projects (right)
             tl.to(canvas, { x: -vw, ease: 'power2.inOut', duration: 1 });
-            // Segment 2: Projects → About (up)
-            tl.to(canvas, { y: -vh, ease: 'power2.inOut', duration: 1 });
-            // Segment 3: About → Skills (right)
+            // Segment 2: Projects → Experience (up)
+            tl.to(canvas, { y: -2 * vh, ease: 'power2.inOut', duration: 1 });
+            // Segment 3: Experience → About (right)
             tl.to(canvas, { x: -2 * vw, ease: 'power2.inOut', duration: 1 });
-            // Segment 4: Skills → Blog (up)
-            tl.to(canvas, { y: 0, ease: 'power2.inOut', duration: 1 });
-            // Segment 5: Blog → Contact (right)
+            // Segment 4: About → Skills (up)
+            tl.to(canvas, { y: -vh, ease: 'power2.inOut', duration: 1 });
+            // Segment 5: Skills → Blog (right)
             tl.to(canvas, { x: -3 * vw, ease: 'power2.inOut', duration: 1 });
+            // Segment 6: Blog → Contact (up)
+            tl.to(canvas, { y: 0, ease: 'power2.inOut', duration: 1 });
 
             ScrollTrigger.create({
                 animation: tl,
@@ -113,8 +116,9 @@
     }
 
     function updateArrow(progress) {
-        var isVertical = (progress >= 0.19 && progress < 0.41) ||
-                         (progress >= 0.59 && progress < 0.81);
+        // 6 segmentos alternando derecha / arriba; el +0.01 gira la flecha justo antes del quiebre
+        var segment = Math.min(5, Math.floor((progress + 0.01) * 6));
+        var isVertical = segment % 2 === 1;
         directionArrow.classList.toggle('point-up', isVertical);
 
         // Fade out near the end
@@ -129,7 +133,7 @@
         for (var i = 0; i < sectionNames.length; i++) {
             var name = sectionNames[i];
             if (activated[name]) continue;
-            if (Math.abs(progress - sectionProgress[i]) < 0.12) {
+            if (Math.abs(progress - sectionProgress[i]) < 0.1) {
                 activated[name] = true;
                 var sel = '.section--' + name + ' .animate-in';
                 gsap.to(sel, {

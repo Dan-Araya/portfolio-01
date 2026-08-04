@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +21,9 @@
             <header class="section section--hero" id="hero">
                 <div class="section-inner">
                     <h1 class="hero__name animate-in">Dan Araya</h1>
-                    <p class="hero__tagline animate-in">Construyendo pipelines de datos en AWS</p>
-                    <p class="hero__subtitle animate-in">Python · SQL · Terraform </p>
-                    <p class="hero__location animate-in">La Serena, Chile</p>
+                    <p class="hero__tagline animate-in">Software Engineer</p>
+                    <p class="hero__subtitle animate-in">WebAssembly · C/C++ · Python · React · AWS</p>
+                    <p class="hero__location animate-in">Coquimbo, Chile</p>
                     <div class="hero__scroll-hint animate-in">
                         <span>Desliza para explorar</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -37,28 +37,97 @@
             <!-- Projects -->
             <section class="section section--projects" id="projects">
                 <div class="section-inner">
-                    <h2 class="projects__heading animate-in">Proyecto principal</h2>
-                    <div class="projects__grid">
-                        <article class="project-card project-card--featured animate-in" onclick="location.href='proyecto.html'" style="cursor:pointer">
-                            <div class="project-card__thumbnail" style="background: url('assets/cover.png') center/cover no-repeat"></div>
+                    <h2 class="projects__heading animate-in">Proyectos</h2>
+                    <!--
+                        SLOT DESTACADO. Cuando SpiderMonkey → WebAssembly esté documentado:
+                        1. Pega su <article class="project-card project-card--featured"> aquí arriba.
+                        2. Mueve esta tarjeta de BTC a projects__secondary como project-card--compact
+                           (quitando el thumbnail); el grid es auto-fit y absorbe la tercera columna solo.
+                    -->
+                    <article class="project-card project-card--featured animate-in" onclick="location.href='proyecto.html'" style="cursor:pointer">
+                        <div class="project-card__thumbnail" style="background: url('assets/cover.png') center/cover no-repeat"></div>
+                        <div class="project-card__body">
+                            <h3 class="project-card__title">Pipeline de datos para arbitraje histórico de BTC</h3>
+                            <p class="project-card__subtitle">AWS Serverless · Medallion · Terraform</p>
+                            <p class="project-card__description">Reconstruye 9 años de spreads de BTC entre Buda.com (CLP) y Binance (USDT), normalizados por el tipo de cambio del Banco Central. Ingesta heterogénea, OHLCV minutal desde trades crudos y consulta vía Glue + Athena con partition projection: <strong>10,4 millones de velas</strong>, y una query identifica episodios de prima ≥ 1% en ~3 segundos.</p>
+                            <div class="project-card__tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">AWS Lambda</span>
+                                <span class="tag">Step Functions</span>
+                                <span class="tag">Athena</span>
+                                <span class="tag">Terraform</span>
+                                <span class="tag">Parquet</span>
+                            </div>
+                            <a href="proyecto.html" class="project-card__link" onclick="event.stopPropagation()">Leer el caso completo →</a>
+                        </div>
+                    </article>
+
+                    <div class="projects__secondary">
+                        <article class="project-card project-card--compact animate-in">
                             <div class="project-card__body">
-                                <h3 class="project-card__title">Pipeline de datos para análisis histórico de arbitraje de BTC</h3>
-                                <p class="project-card__subtitle">AWS Serverless · Medallion Architecture · IaC con Terraform</p>
-                                <p class="project-card__description">Pipeline de Data Engineering end-to-end que reconstruye 9 años de spreads históricos de BTC entre Buda.com (BTC-CLP) y Binance (BTC-USDT), normalizado por USD/CLP del Banco Central de Chile. Arquitectura medallion Bronze → Silver en S3, ingesta heterogénea con paginación por cursor y por offset temporal, reconstrucción OHLCV minutal desde trades crudos, JOIN cross-timezone para normalización USDT -> CLP, y consulta analítica vía Glue Data Catalog + Athena con partition projection. Más de 10.4 millones de velas procesadas, una query SQL identifica episodios sostenidos de prima ≥ 1% en ~3 segundos.</p>
+                                <h3 class="project-card__title">vox2txt</h3>
+                                <p class="project-card__subtitle">Python · faster-whisper · Linux y Windows</p>
+                                <p class="project-card__description">Dictado por voz global: mantienes una tecla, hablas, y el texto se pega en la ventana activa. Transcripción 100% local. Resuelve permisos de <code>uinput</code>, hotkeys globales y portapapeles en ambos sistemas.</p>
                                 <div class="project-card__tags">
                                     <span class="tag">Python</span>
-                                    <span class="tag">AWS Lambda</span>
-                                    <span class="tag">Step Functions</span>
-                                    <span class="tag">S3</span>
-                                    <span class="tag">Glue</span>
-                                    <span class="tag">Athena</span>
-                                    <span class="tag">Terraform</span>
-                                    <span class="tag">pandas</span>
-                                    <span class="tag">pyarrow</span>
-                                    <span class="tag">Parquet</span>
+                                    <span class="tag">Whisper</span>
+                                    <span class="tag">systemd</span>
                                 </div>
-                                <a href="https://github.com/Dan-Araya/Pipeline-de-datos-para-analisis-de-arbitraje-de-BTC.git" class="project-card__link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Ver repositorio en GitHub →</a>
+                                <a href="https://github.com/Dan-Araya/vox2txt" class="project-card__link" target="_blank" rel="noopener noreferrer">Ver en GitHub →</a>
                             </div>
+                        </article>
+
+                        <article class="project-card project-card--compact animate-in">
+                            <div class="project-card__body">
+                                <h3 class="project-card__title">Graphite</h3>
+                                <p class="project-card__subtitle">Rust · TUI · En desarrollo</p>
+                                <p class="project-card__description">Workspace de notas Markdown enlazadas para la terminal. Mantiene los <code>.md</code> como fuente de verdad y construye encima navegación, propiedades, wiki links y backlinks.</p>
+                                <div class="project-card__tags">
+                                    <span class="tag">Rust</span>
+                                    <span class="tag">ratatui</span>
+                                    <span class="tag">Markdown</span>
+                                </div>
+                                <a href="https://github.com/Dan-Araya/Graphite" class="project-card__link" target="_blank" rel="noopener noreferrer">Ver en GitHub →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experiencia -->
+            <section class="section section--experience" id="experience">
+                <div class="section-inner">
+                    <h2 class="experience__heading animate-in">Experiencia</h2>
+                    <div class="experience__list">
+                        <article class="experience-entry animate-in">
+                            <div class="experience-entry__info">
+                                <h3 class="experience-entry__title">Software Developer — AI Research &amp; Automation</h3>
+                                <p class="experience-entry__company">Mindrift (Toloka) · Freelance · Remoto</p>
+                                <p class="experience-entry__detail">Automatización asíncrona en Python (asyncio/aiohttp) para extraer y estructurar <strong>más de 16.000 registros</strong> desde fuentes web públicas, con arquitectura Bronze → Silver → Gold. Consolidación multi-fuente vía APIs REST y SPARQL, y validación cruzada de contenido generado por LLMs contra fuentes primarias para detectar alucinaciones.</p>
+                            </div>
+                            <span class="experience-entry__date">Mar 2026 — actualidad</span>
+                        </article>
+                        <article class="experience-entry animate-in">
+                            <div class="experience-entry__info">
+                                <h3 class="experience-entry__title">Co-founder &amp; Fullstack Developer</h3>
+                                <p class="experience-entry__company">Aspha · Proyecto Corfo Semilla Inicia</p>
+                                <p class="experience-entry__detail">Lideré el desarrollo técnico de una plataforma de Cloud Gaming distribuido financiada por Corfo (<strong>CLP $20 millones</strong>). Arquitectura del sistema, frontend en React, infraestructura en AWS y contenerización con Docker.</p>
+                            </div>
+                            <span class="experience-entry__date">Nov 2024 — Nov 2025</span>
+                        </article>
+                        <article class="experience-entry experience-entry--brief animate-in">
+                            <div class="experience-entry__info">
+                                <h3 class="experience-entry__title">Ejecutivo de Habilitación Digital</h3>
+                                <p class="experience-entry__company">IPS ChileAtiende</p>
+                            </div>
+                            <span class="experience-entry__date">Abr 2024 — Mar 2026</span>
+                        </article>
+                        <article class="experience-entry experience-entry--brief animate-in">
+                            <div class="experience-entry__info">
+                                <h3 class="experience-entry__title">Auxiliar Administrativo — automatización de reportería</h3>
+                                <p class="experience-entry__company">Starco | Demarco · La Serena</p>
+                            </div>
+                            <span class="experience-entry__date">Abr 2022 — Mar 2024</span>
                         </article>
                     </div>
                 </div>
@@ -70,9 +139,9 @@
                     <h2 class="about__heading animate-in">Sobre mí</h2>
                     <div class="about__content">
                         <div class="about__bio">
-                            <p class="animate-in">Fue en 2023. Había conseguido un trabajo que consistía en extraer datos laborales, imágenes e información de geolocalización para la creación de informes de reporte diarios. Le comentaba a un amigo que estudiaba informática sobre lo que hacía y me dijo: "¿Y no has pensado automatizarlo con Python?". Me quedé mudo ante esa palabra de resonancia arcana y mágica. No sabía lo que era. Y me puse a investigar. Tras un par de videos y mis primeros "hola mundo", descubrí que era lo que necesitaba.</p>
-                            <p class="animate-in">Me puse a hacer scripts para la creación de directorios, la búsqueda de strings en PDFs (<a href="https://github.com/Dan-Araya/pdf.extractor" target="_blank" rel="noopener">github.com/Dan-Araya/pdf.extractor</a>) y descarga de datos desde una interfaz web con Selenium. Pronto me vi inmerso en un mundo nuevo y fascinante. Me motivé tanto que con dos amigos decidimos resolver un problema concreto: brindar la oportunidad de acceder a recursos computacionales de forma remota para gaming u otras actividades. ¡En 2024 postulamos a un Fondo Semilla Inicia ($20 MM) y ganamos la ejecución para el 2025! Ahí descubrimos que montar algo serio es realmente difícil, y aunque finalizamos con éxito la ejecución del programa, decidimos no continuar más allá de él.</p>
-                            <p class="animate-in">En resumen, han sido unos años agitados que lentamente me han ido guiando hacia el código y hacia la estructuración de flujos de datos. Hoy estoy enfocado en Data Engineering: en diseñar pipelines reproducibles, instrumentar decisiones con datos reales y documentar aquello que funciona (y aquello que no). Este portafolio es una muestra de ese trabajo.</p>
+                            <p class="animate-in">Fue en 2023. Tenía un trabajo que consistía en extraer datos laborales, imágenes y geolocalización para armar informes diarios. Le contaba a un amigo que estudiaba informática lo que hacía y me dijo: "¿Y no has pensado automatizarlo con Python?". Me quedé mudo ante esa palabra de resonancia arcana. No sabía lo que era, así que me puse a investigar. Tras un par de videos y mis primeros "hola mundo", descubrí que era exactamente lo que necesitaba: esas automatizaciones llevaron la contabilización de sobreproducción de residuos de ~250 mil a más de un millón de litros mensuales.</p>
+                            <p class="animate-in">Vinieron scripts para crear directorios, buscar strings en PDFs (<a href="https://github.com/Dan-Araya/pdf.extractor" target="_blank" rel="noopener">pdf.extractor</a>) y descargar datos con Selenium. Me motivé tanto que con dos amigos postulamos a un Fondo Semilla Inicia para dar acceso remoto a recursos computacionales, y ganamos la ejecución. Ahí aprendí que montar algo serio es realmente difícil: cerramos el programa con éxito y decidimos no continuar más allá de él.</p>
+                            <p class="animate-in">Hoy trabajo como desarrollador freelance en automatización asistida por IA, y en paralelo construyo herramientas propias: dictado por voz offline en Python, un workspace de notas en Rust y una migración de SpiderMonkey a WebAssembly. Lo que me interesa es lo mismo de siempre: diseñar procesos reproducibles, instrumentar decisiones con datos reales y documentar lo que funciona (y lo que no).</p>
                         </div>
                     </div>
                 </div>
@@ -87,6 +156,8 @@
                             <h3 class="skills__category-name">Lenguajes</h3>
                             <div class="skills__tags">
                                 <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Rust</span>
+                                <span class="skill-tag">C/C++</span>
                                 <span class="skill-tag">SQL</span>
                                 <span class="skill-tag">JavaScript</span>
                                 <span class="skill-tag">Bash</span>
@@ -111,11 +182,26 @@
                             </div>
                         </div>
                         <div class="animate-in">
-                            <h3 class="skills__category-name">Frontend</h3>
+                            <h3 class="skills__category-name">Automatización & IA</h3>
+                            <div class="skills__tags">
+                                <span class="skill-tag">asyncio</span>
+                                <span class="skill-tag">aiohttp</span>
+                                <span class="skill-tag">BeautifulSoup</span>
+                                <span class="skill-tag">Selenium</span>
+                                <span class="skill-tag">APIs REST</span>
+                                <span class="skill-tag">SPARQL</span>
+                                <span class="skill-tag">OpenRouter</span>
+                                <span class="skill-tag">Validación de LLMs</span>
+                            </div>
+                        </div>
+                        <div class="animate-in">
+                            <h3 class="skills__category-name">Frontend & Web</h3>
                             <div class="skills__tags">
                                 <span class="skill-tag">HTML</span>
                                 <span class="skill-tag">CSS</span>
                                 <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">WebAssembly</span>
                                 <span class="skill-tag">GSAP</span>
                             </div>
                         </div>
@@ -142,7 +228,14 @@
                                 <h3 class="blog-entry__title">Ingeniería en Informática</h3>
                                 <p class="blog-entry__excerpt">Instituto Profesional IACC</p>
                             </div>
-                            <span class="blog-entry__date">2024 — en curso</span>
+                            <span class="blog-entry__date">2024 — 2028</span>
+                        </article>
+                        <article class="blog-entry animate-in">
+                            <div class="blog-entry__info">
+                                <h3 class="blog-entry__title">Introduction to WebAssembly (LFD133)</h3>
+                                <p class="blog-entry__excerpt">The Linux Foundation</p>
+                            </div>
+                            <span class="blog-entry__date">Jul 2026</span>
                         </article>
                         <article class="blog-entry animate-in">
                             <div class="blog-entry__info">
@@ -166,9 +259,9 @@
             <footer class="section section--contact" id="contact">
                 <div class="section-inner">
                     <h2 class="contact__heading animate-in">Contacto</h2>
-                    <p class="contact__closing animate-in">Abierto a roles de Data Engineer en la 4ta región o en remoto.</p>
-                    <div class="contact__links animate-in"> 
-                        <a href="mailto:tu@email.com" class="contact__link">
+                    <p class="contact__closing animate-in">Abierto a roles de Software Engineer o Data Engineer en la Región de Coquimbo, híbrido o en remoto.</p>
+                    <div class="contact__links animate-in">
+                        <a href="mailto:dan.araya.wk@gmail.com" class="contact__link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="4" width="20" height="16" rx="2"/>
                                 <polyline points="22 4 12 13 2 4"/>
@@ -181,7 +274,7 @@
                             </svg>
                             GitHub
                         </a>
-                        <a href="https://linkedin.com/in/tu-perfil" class="contact__link" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/in/dan-araya-19672a2bb" class="contact__link" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
@@ -197,11 +290,12 @@
     <!-- Navigation -->
     <nav class="nav" aria-label="Section navigation">
         <button class="nav__item is-active" data-index="0">Hero</button>
-        <button class="nav__item" data-index="1">Projects</button>
-        <button class="nav__item" data-index="2">About</button>
-        <button class="nav__item" data-index="3">Skills</button>
-        <button class="nav__item" data-index="4">Educación</button>
-        <button class="nav__item" data-index="5">Contact</button>
+        <button class="nav__item" data-index="1">Proyectos</button>
+        <button class="nav__item" data-index="2">Experiencia</button>
+        <button class="nav__item" data-index="3">Sobre mí</button>
+        <button class="nav__item" data-index="4">Stack</button>
+        <button class="nav__item" data-index="5">Educación</button>
+        <button class="nav__item" data-index="6">Contacto</button>
     </nav>
 
     <!-- Direction arrow -->

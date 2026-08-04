@@ -1,0 +1,7 @@
+# Material de trabajo local, no se publica
+info para actualizar el portfolio/
+apuntes/
+
+# Entornos y secretos
+venv/
+.env
